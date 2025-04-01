@@ -130,7 +130,20 @@ show_progress() {
     echo -e "\n${GREEN}Complete!${NC}"
 }
 
-=s928b
+# Function for non-rooted devices - THIS FUNCTION WAS MISSING
+spoof_device_nonroot() {
+    show_notification "Starting device spoofing (non-root mode)..."
+    
+    # Create temporary directory
+    TEMP_DIR=$(mktemp -d)
+    
+    # Create props file for local environment
+    cat > "$TEMP_DIR/s25_props.txt" << EOF
+ro.product.manufacturer=Samsung
+ro.product.model=SM-S928B
+ro.product.name=s928bxxu
+ro.product.device=s928b
+ro.build.product=s928b
 ro.build.description=s928bxxu1AXXX
 ro.build.fingerprint=samsung/s928bxxu/s928b:14/UP1A.xxx/AXXXX:user/release-keys
 EOF
