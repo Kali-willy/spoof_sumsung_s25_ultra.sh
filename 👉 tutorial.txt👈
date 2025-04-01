@@ -1,0 +1,65 @@
+## How to Execute the Script in Termux:
+
+1. First, install Termux from Google Play Store or F-Droid
+2. Open Termux and install required packages:
+   ```
+   👉pkg update && pkg upgrade👈
+   👉pkg install nano👈
+   ```
+
+3. Create the script:
+   ```
+   👉nano samsung_s25_spoofer.sh👈
+   ```
+
+4. Copy and paste the entire script I provided
+
+5. Save the file:
+   - Press Ctrl+O
+   - Press Enter to confirm
+   - Press Ctrl+X to exit
+
+6. Make the script executable:
+   ```
+   👉chmod +x samsung_s25_spoofer.sh👈
+   ```
+
+7. Run the script:
+   ```
+   👉./samsung_s25_spoofer.sh👈
+   ```
+
+## How to Execute in Brevent:
+
+1. Open Brevent app
+2. Navigate to the "Terminal" section
+3. Use the file browser to locate your script
+4. Execute with:
+   ```
+   👉bash /path/to/samsung_s25_spoofer.sh👈
+   ```
+
+## How to Execute in Qute:
+
+1. Open Qute terminal
+2. Navigate to the directory where you saved the script:
+   ```
+   👉cd /sdcard/Download 👈 # or wherever you saved it
+   ```
+
+3. Make sure it's executable:
+   ```
+   👉chmod 755 samsung_s25_spoofer.sh👈
+   ```
+
+4. Run it:
+   ```
+   👉sh samsung_s25_spoofer.sh👈
+   ```
+
+If you're experiencing issues with permissions, try running it with bash explicitly:
+```
+👉bash samsung_s25_spoofer.sh👈
+```
+
+The script is designed to work across these terminal environments, auto-detecting if you're using Termux and installing any required dependencies automatically.
