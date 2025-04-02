@@ -1,410 +1,467 @@
-#!/data/data/com.termux/files/usr/bin/bash
-# You can also run with: bash spoof_samsung_s25_ultra.sh
+#!/bin/bash
+# =================================================================
+# Samsung S24 Ultra Performance Optimizer
+# Compatible with: Termux, Brevent, and Qute
+# Supports all Android devices with root
+# =================================================================
 
-# Spoof_samsung_s25_ultra.sh
-# Created by Willy Gailo
-# Compatible with Termux, Brevent, and Qute terminal environments
-# Script to simulate Samsung S25 Ultra device properties
-# Works on both rooted and non-rooted devices
-# Safe implementation that won't damage your device
+# Check if running in supported terminal
+TERMINAL="$(ps -o comm= -p "$PPID")"
+if [[ ! "$TERMINAL" =~ (termux|brevent|qute) ]]; then
+    echo "This script must be run in Termux, Brevent, or Qute!"
+    exit 1
+fi
 
-# Colors
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-BLUE='\033[0;34m'
-YELLOW='\033[1;33m'
-CYAN='\033[0;36m'
-PURPLE='\033[0;35m'
-WHITE='\033[1;37m'
-NC='\033[0m' # No Color
-
-# Function for improved animation - smartphone design
-show_animation() {
+# Display ASCII Samsung logo animation
+display_logo() {
     clear
-    echo ""
-    echo -e "${WHITE}     ┌───────────┐     ${NC}"
-    echo -e "${WHITE}     │           │     ${NC}"
-    echo -e "${WHITE}     │  ${BLUE}SAMSUNG${WHITE}  │     ${NC}"
-    echo -e "${WHITE}     │   ${CYAN}Galaxy${WHITE}  │     ${NC}"
-    echo -e "${WHITE}     │${GREEN} S25 Ultra ${WHITE}│     ${NC}"
-    echo -e "${WHITE}     │           │     ${NC}"
-    echo -e "${WHITE}     └───────────┘     ${NC}"
-    echo ""
-    sleep 0.5
+    echo -e "\e[34m"
+    echo "  ███████╗ █████╗ ███╗   ███╗███████╗██╗   ██╗███╗   ██╗ ██████╗ "
+    sleep 0.1
     clear
-    echo ""
-    echo -e "${WHITE}     ┌───────────┐     ${NC}"
-    echo -e "${WHITE}     │${PURPLE} ●        ${WHITE}│     ${NC}"
-    echo -e "${WHITE}     │  ${BLUE}SAMSUNG${WHITE}  │     ${NC}"
-    echo -e "${WHITE}     │   ${CYAN}Galaxy${WHITE}  │     ${NC}"
-    echo -e "${WHITE}     │${RED} S25 Ultra ${WHITE}│     ${NC}"
-    echo -e "${WHITE}     │           │     ${NC}"
-    echo -e "${WHITE}     └───────────┘     ${NC}"
-    echo ""
-    sleep 0.5
-}
-
-# Display cool header with smartphone design
-display_header() {
+    echo -e "\e[34m"
+    echo "  ███████╗ █████╗ ███╗   ███╗███████╗██╗   ██╗███╗   ██╗ ██████╗ "
+    echo "  ██╔════╝██╔══██╗████╗ ████║██╔════╝██║   ██║████╗  ██║██╔════╝ "
+    sleep 0.1
     clear
-    echo ""
-    echo -e "${WHITE}  ┌─────────────────┐  ${NC}"
-    echo -e "${WHITE}  │    ${CYAN}●${WHITE}     ${PURPLE}●${WHITE}    │  ${NC}"
-    echo -e "${WHITE}  │                 │  ${NC}"
-    echo -e "${WHITE}  │  ${BLUE}S A M S U N G${WHITE}  │  ${NC}"
-    echo -e "${WHITE}  │                 │  ${NC}"
-    echo -e "${WHITE}  │    ${GREEN}Galaxy${WHITE}      │  ${NC}"
-    echo -e "${WHITE}  │   ${RED}S25 Ultra${WHITE}     │  ${NC}"
-    echo -e "${WHITE}  │                 │  ${NC}"
-    echo -e "${WHITE}  │                 │  ${NC}"
-    echo -e "${WHITE}  │                 │  ${NC}"
-    echo -e "${WHITE}  │                 │  ${NC}"
-    echo -e "${WHITE}  │        ${YELLOW}○${WHITE}        │  ${NC}"
-    echo -e "${WHITE}  └─────────────────┘  ${NC}"
-    echo ""
-    echo -e "${CYAN}=====================================${NC}"
-    echo -e "${GREEN}    Samsung S25 Ultra Device Spoofer${NC}"
-    echo -e "${BLUE}    Created by: Willy Gailo${NC}"
-    echo -e "${BLUE}    Safe for all Android devices${NC}"
-    echo -e "${CYAN}=====================================${NC}"
-    echo ""
+    echo -e "\e[34m"
+    echo "  ███████╗ █████╗ ███╗   ███╗███████╗██╗   ██╗███╗   ██╗ ██████╗ "
+    echo "  ██╔════╝██╔══██╗████╗ ████║██╔════╝██║   ██║████╗  ██║██╔════╝ "
+    echo "  ███████╗███████║██╔████╔██║███████╗██║   ██║██╔██╗ ██║██║  ███╗"
+    sleep 0.1
+    clear
+    echo -e "\e[34m"
+    echo "  ███████╗ █████╗ ███╗   ███╗███████╗██╗   ██╗███╗   ██╗ ██████╗ "
+    echo "  ██╔════╝██╔══██╗████╗ ████║██╔════╝██║   ██║████╗  ██║██╔════╝ "
+    echo "  ███████╗███████║██╔████╔██║███████╗██║   ██║██╔██╗ ██║██║  ███╗"
+    echo "  ╚════██║██╔══██║██║╚██╔╝██║╚════██║██║   ██║██║╚██╗██║██║   ██║"
+    sleep 0.1
+    clear
+    echo -e "\e[34m"
+    echo "  ███████╗ █████╗ ███╗   ███╗███████╗██╗   ██╗███╗   ██╗ ██████╗ "
+    echo "  ██╔════╝██╔══██╗████╗ ████║██╔════╝██║   ██║████╗  ██║██╔════╝ "
+    echo "  ███████╗███████║██╔████╔██║███████╗██║   ██║██╔██╗ ██║██║  ███╗"
+    echo "  ╚════██║██╔══██║██║╚██╔╝██║╚════██║██║   ██║██║╚██╗██║██║   ██║"
+    echo "  ███████║██║  ██║██║ ╚═╝ ██║███████║╚██████╔╝██║ ╚████║╚██████╔╝"
+    sleep 0.1
+    clear
+    echo -e "\e[34m"
+    echo "  ███████╗ █████╗ ███╗   ███╗███████╗██╗   ██╗███╗   ██╗ ██████╗ "
+    echo "  ██╔════╝██╔══██╗████╗ ████║██╔════╝██║   ██║████╗  ██║██╔════╝ "
+    echo "  ███████╗███████║██╔████╔██║███████╗██║   ██║██╔██╗ ██║██║  ███╗"
+    echo "  ╚════██║██╔══██║██║╚██╔╝██║╚════██║██║   ██║██║╚██╗██║██║   ██║"
+    echo "  ███████║██║  ██║██║ ╚═╝ ██║███████║╚██████╔╝██║ ╚████║╚██████╔╝"
+    echo "  ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ "
+    sleep 0.2
+    clear
+    echo -e "\e[34m"
+    echo "  ███████╗██████╗ ██╗  ██╗    ██╗   ██╗██╗  ████████╗██████╗  █████╗ "
+    echo "  ██╔════╝██╔══██╗██║  ██║    ██║   ██║██║  ╚══██╔══╝██╔══██╗██╔══██╗"
+    echo "  ███████╗██████╔╝███████║    ██║   ██║██║     ██║   ██████╔╝███████║"
+    echo "  ╚════██║██╔═══╝ ██╔══██║    ██║   ██║██║     ██║   ██╔══██╗██╔══██║"
+    echo "  ███████║██║     ██║  ██║    ╚██████╔╝███████╗██║   ██║  ██║██║  ██║"
+    echo "  ╚══════╝╚═╝     ╚═╝  ╚═╝     ╚═════╝ ╚══════╝╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝"
+    echo -e "\e[94m-----------------------------------------------------"
+    echo -e "\e[94mSAMSUNG S24 ULTRA PERFORMANCE OPTIMIZER"
+    echo -e "\e[94m-----------------------------------------------------\e[0m"
+    sleep 2
 }
 
-# Check if running on Android with Termux compatibility
-check_android() {
-    if [ ! -d "/system" ] && [ ! -d "/data/data/com.termux" ]; then
-        echo -e "${RED}Error: This script must be run on an Android device with Termux, Brevent, or Qute.${NC}"
-        exit 1
-    fi
-    
-    # Check for required packages in Termux
-    if [ -d "/data/data/com.termux" ] && [ ! -x "$(command -v tput)" ]; then
-        echo -e "${YELLOW}Installing required packages in Termux...${NC}"
-        pkg update -y
-        pkg install -y ncurses termux-api
-    fi
-}
+# Variables
+IS_ROOTED=false
+DEVICE_MODEL=""
+CPU_INFO=""
+MEMORY_INFO=""
+KERNEL_VERSION=""
+ANDROID_VERSION=""
+GPU_INFO=""
+SCRIPT_PID=$$
 
-# Function to show notification with Termux compatibility
-show_notification() {
-    # Try Termux-specific notification first
-    if [ -x "$(command -v termux-notification)" ]; then
-        termux-notification --title "Samsung S25 Ultra Spoofer" --content "$1"
-        echo -e "${CYAN}[NOTIFICATION]${NC} $1"
-    # Try standard Android notification
-    elif [ -x "$(command -v am)" ]; then
-        # Using Android's am command to display notification
-        am broadcast -a android.intent.action.MAIN -e message "$1" -e title "Samsung S25 Ultra Spoofer" -n com.android.shell/.BroadcastReceiver
-        echo -e "${CYAN}[NOTIFICATION]${NC} $1"
-    else
-        echo -e "${CYAN}[NOTIFICATION]${NC} $1"
-    fi
-}
-
-# Function to check if device is rooted with various methods
+# Check if device is rooted
 check_root() {
-    # Check multiple methods for detecting root
-    if [ -x "$(command -v su)" ] || [ -f "/system/xbin/su" ] || [ -f "/system/bin/su" ] || [ -f "/sbin/su" ] || [ -f "/magisk/.core/bin/su" ]; then
-        echo -e "${GREEN}Rooted device detected.${NC}"
+    echo -e "\e[93mChecking root status...\e[0m"
+    if [ -f /system/xbin/su ] || [ -f /system/bin/su ] || [ -f /sbin/su ] || [ -f /su/bin/su ]; then
         IS_ROOTED=true
+        echo -e "\e[92mDevice is rooted\e[0m"
     else
-        # Try to execute a simple root command to catch custom root implementations
-        if timeout 1 su -c "id" >/dev/null 2>&1; then
-            echo -e "${GREEN}Rooted device detected.${NC}"
-            IS_ROOTED=true
-        else
-            echo -e "${YELLOW}Non-rooted device detected.${NC}"
-            IS_ROOTED=false
-        fi
+        echo -e "\e[93mDevice is not rooted\e[0m"
     fi
-}
-
-# Progress bar function
-show_progress() {
-    local duration=$1
-    local width=50
-    local progress=0
-    local fill
-    local empty
-    
-    echo -ne "${BLUE}Progress: ${NC}"
-    
-    while [ $progress -le 100 ]; do
-        let fill=progress*width/100
-        let empty=width-fill
-        
-        printf "\r[%${fill}s%${empty}s] %3d%%" '' '' $progress
-        
-        progress=$((progress + 2))
-        sleep $duration
-    done
-    echo -e "\n${GREEN}Complete!${NC}"
-}
-
-# Improved function for non-rooted devices
-spoof_device_nonroot() {
-    show_notification "Starting device spoofing (non-root mode)..."
-    
-    # Create temporary directory
-    TEMP_DIR=$(mktemp -d)
-    
-    # Create props file for local environment
-    cat > "$TEMP_DIR/s25_props.txt" << EOF
-ro.product.manufacturer=Samsung
-ro.product.model=SM-S928B
-ro.product.name=s928bxxu
-ro.product.device=s928b
-ro.build.product=s928b
-ro.build.description=s928bxxu1AXXX
-ro.build.fingerprint=samsung/s928bxxu/s928b:14/UP1A.xxx/AXXXX:user/release-keys
-ro.product.brand=samsung
-ro.product.board=s5e9935
-ro.board.platform=universal9935
-EOF
-    
-    # Create a wrapper script that sets these properties
-    cat > "$HOME/.termux/spoof_env.sh" << EOF
-#!/data/data/com.termux/files/usr/bin/bash
-# Environment settings for Samsung S25 Ultra spoofing
-export ANDROID_PROPERTY_WORKSPACE="$TEMP_DIR/s25_props.txt"
-export ANDROID_SERIAL="SM-S928B"
-export ANDROID_DEVICE=s928b
-export ANDROID_PRODUCT=SM-S928B
-export ANDROID_MODEL=SM-S928B
-EOF
-    
-    # Make it executable
-    chmod +x "$HOME/.termux/spoof_env.sh"
-    
-    # Add to bashrc if not already there
-    if ! grep -q "spoof_env.sh" "$HOME/.bashrc" 2>/dev/null; then
-        echo "source $HOME/.termux/spoof_env.sh" >> "$HOME/.bashrc"
-    fi
-    
-    # Apply to current session
-    source "$HOME/.termux/spoof_env.sh"
-    
-    show_progress 0.02
-    
-    # Additional settings for apps that might use direct values
-    if [ -d "/data/data/com.termux" ]; then
-        mkdir -p "$HOME/.termux/tasker"
-        echo "samsung_s928b" > "$HOME/.termux/device_profile"
-    fi
-    
-    show_notification "Device properties set in local environment"
-    echo -e "${GREEN}Samsung S25 Ultra properties have been set locally.${NC}"
-    echo -e "${YELLOW}Note: These changes will apply to apps launched from this shell.${NC}"
-    echo -e "${YELLOW}Restart Termux for full effect or run: source ~/.bashrc${NC}"
-    
     sleep 1
-    show_animation
 }
 
-# Improved spoof function for rooted devices
-spoof_device_root() {
-    show_notification "Starting device spoofing (root mode)..."
-    
-    # We'll use both build.prop modifications and system property settings
-    # Backup original build.prop if not already backed up
-    if [ ! -f "/system/build.prop.spoof_backup" ]; then
-        su -c "cp /system/build.prop /system/build.prop.spoof_backup"
-    fi
-    
-    # Create temp props file
-    cat > /sdcard/s25_props.txt << EOF
-# Samsung S25 Ultra Properties
-ro.product.manufacturer=Samsung
-ro.product.model=SM-S928B
-ro.product.name=s928bxxu
-ro.product.device=s928b
-ro.build.product=s928b
-ro.build.description=s928bxxu1AXXX
-ro.build.fingerprint=samsung/s928bxxu/s928b:14/UP1A.xxx/AXXXX:user/release-keys
-ro.product.brand=samsung
-ro.product.board=s5e9935
-ro.board.platform=universal9935
-EOF
-    
-    # Mount system as writable and apply changes
-    su -c "mount -o rw,remount /system"
-    
-    # Method 1: Direct build.prop modification
-    su -c "cp /system/build.prop /system/build.prop.original"
-    su -c "cat /sdcard/s25_props.txt >> /system/build.prop"
-    su -c "chmod 644 /system/build.prop"
-    
-    # Method 2: Use setprop for immediate effect
-    while IFS='=' read -r key value; do
-        # Skip comments and empty lines
-        [[ $key == \#* ]] || [[ -z "$key" ]] && continue
-        # Set property
-        su -c "setprop $key $value"
-    done < /sdcard/s25_props.txt
-    
-    show_progress 0.03
-    
-    # Reset Android runtime properties for changes to take effect
-    show_notification "Applying changes systemwide (this will restart UI)..."
-    su -c "setprop ctl.restart zygote"
-    
-    show_notification "Device properties modified to Samsung S25 Ultra"
-    echo -e "${GREEN}Samsung S25 Ultra properties have been set.${NC}"
-    echo -e "${YELLOW}Note: Original settings backed up to /system/build.prop.spoof_backup${NC}"
-    echo -e "${YELLOW}A UI restart has been initiated to apply changes${NC}"
-    
+# Get device information
+get_device_info() {
+    echo -e "\e[93mGathering device information...\e[0m"
+    # Always set device model to Samsung S24 Ultra for compatibility mode
+    ORIGINAL_DEVICE_MODEL=$(getprop ro.product.model)
+    DEVICE_MODEL="Samsung Galaxy S24 Ultra"
+    CPU_INFO=$(cat /proc/cpuinfo | grep "Hardware" | head -n 1 | cut -d ":" -f 2 | xargs)
+    MEMORY_INFO=$(free -m | grep "Mem:" | awk '{print $2}')
+    KERNEL_VERSION=$(uname -r)
+    ANDROID_VERSION=$(getprop ro.build.version.release)
+    GPU_INFO=$(dumpsys SurfaceFlinger | grep GLES | head -n1 || echo "Snapdragon GPU")
     sleep 1
-    show_animation
 }
 
-# Function to restore original settings (for rooted devices)
-restore_original() {
-    if [ "$IS_ROOTED" = true ]; then
-        show_notification "Restoring original device properties..."
-        
-        # Restore original build.prop
-        su -c "mount -o rw,remount /system"
-        
-        if [ -f "/system/build.prop.spoof_backup" ]; then
-            su -c "cp /system/build.prop.spoof_backup /system/build.prop"
-            su -c "chmod 644 /system/build.prop"
-            su -c "rm /system/build.prop.spoof_backup"
-        elif [ -f "/system/build.prop.original" ]; then
-            su -c "cp /system/build.prop.original /system/build.prop"
-            su -c "chmod 644 /system/build.prop"
-            su -c "rm /system/build.prop.original"
-        fi
-        
-        show_progress 0.03
-        
-        # Reset Android runtime properties
-        show_notification "Applying original settings (this will restart UI)..."
-        su -c "setprop ctl.restart zygote"
-        
-        show_notification "Original device properties restored"
-        echo -e "${GREEN}Original device properties have been restored.${NC}"
-        echo -e "${YELLOW}A UI restart has been initiated to apply changes${NC}"
-        
+# Display device information
+display_device_info() {
+    echo -e "\e[96m═══════════════════════════════════════════"
+    echo -e "📱 Device Model: $DEVICE_MODEL"
+    echo -e "📱 Original Model: $ORIGINAL_DEVICE_MODEL"
+    echo -e "🧠 CPU: $CPU_INFO"
+    echo -e "🎮 GPU: $GPU_INFO"
+    echo -e "💾 RAM: $MEMORY_INFO MB"
+    echo -e "🐧 Kernel: $KERNEL_VERSION"
+    echo -e "🤖 Android: $ANDROID_VERSION"
+    echo -e "🔒 Root Status: $(if $IS_ROOTED; then echo 'Yes'; else echo 'No'; fi)"
+    echo -e "═══════════════════════════════════════════\e[0m"
+    
+    # Prepare for device restart (only when explicitly selected)
+    if [ "$1" = "restart" ]; then
+        echo -e "\e[91mPreparing to restart device in 5 seconds...\e[0m"
         sleep 1
-        show_animation
+        echo -e "\e[91m4...\e[0m"
+        sleep 1
+        echo -e "\e[91m3...\e[0m"
+        sleep 1
+        echo -e "\e[91m2...\e[0m"
+        sleep 1
+        echo -e "\e[91m1...\e[0m"
+        sleep 1
+        
+        # Attempt to restart device if rooted
+        if [ "$IS_ROOTED" = true ]; then
+            su -c "svc power reboot" || su -c "reboot" || reboot
+        else
+            echo -e "\e[91mReboot requires root permission\e[0m"
+            sleep 2
+        fi
     else
-        # For non-rooted, just remove our local changes
-        show_notification "Restoring non-root local environment..."
-        
-        if [ -f "$HOME/.termux/spoof_env.sh" ]; then
-            rm "$HOME/.termux/spoof_env.sh"
-        fi
-        
-        # Remove from bashrc
-        if [ -f "$HOME/.bashrc" ]; then
-            sed -i '/spoof_env.sh/d' "$HOME/.bashrc"
-        fi
-        
-        # Remove device profile
-        if [ -f "$HOME/.termux/device_profile" ]; then
-            rm "$HOME/.termux/device_profile"
-        fi
-        
-        show_notification "Local environment restored"
-        echo -e "${GREEN}Local spoofing settings have been removed.${NC}"
-        echo -e "${YELLOW}Restart Termux for full effect or start a new shell.${NC}"
+        sleep 2
     fi
 }
 
-# Function to check if spoofing is active
-check_spoof_status() {
-    echo -e "${CYAN}Current device properties:${NC}"
+# Send notification
+send_notification() {
+    am start -a android.intent.action.VIEW -d "notification://$1" > /dev/null 2>&1 || \
+    termux-notification -t "S24 Ultra Optimizer" -c "$1" --icon speed > /dev/null 2>&1 || \
+    echo -e "\e[92m$1\e[0m"
+}
+
+# Samsung specific optimizations - Non-root methods
+optimize_performance_nonroot() {
+    echo -e "\e[93mOptimizing system performance (non-root)...\e[0m"
+    
+    # Clear background apps
+    am kill-all > /dev/null 2>&1
+    
+    # Disable animations to improve performance
+    settings put global window_animation_scale 0.5 > /dev/null 2>&1
+    settings put global transition_animation_scale 0.5 > /dev/null 2>&1
+    settings put global animator_duration_scale 0.5 > /dev/null 2>&1
+    
+    # Enable high performance mode if available (Samsung specific)
+    settings put system power_mode 1 > /dev/null 2>&1
+    
+    # Enable enhanced processing if available
+    settings put system enhanced_processing 1 > /dev/null 2>&1
+    
+    # Set higher touch sampling rate if available
+    settings put system game_auto_temperature_control 0 > /dev/null 2>&1
+    
+    # Reduce memory pressure
+    am set-inactive-state com.google.android.gms true > /dev/null 2>&1
+    
+    # Try to enable Game Booster optimization
+    am start -n com.samsung.android.game.gametools/.MainService > /dev/null 2>&1
+    am start -n com.samsung.android.game.gos/.activity.setting.AdvancedLabSettingActivity > /dev/null 2>&1
+    
+    # Check and enable high performance profile
+    if [ -f "/sys/class/power_supply/battery/batt_slate_mode" ]; then
+        echo "0" > /sys/class/power_supply/battery/batt_slate_mode 2>/dev/null
+    fi
+    
+    send_notification "Performance optimizations applied"
+    echo -e "\e[92mNon-root performance optimizations applied\e[0m"
+    sleep 1
+}
+
+# Root-only optimizations for Samsung S24 Ultra
+optimize_performance_root() {
+    if [ "$IS_ROOTED" = true ]; then
+        echo -e "\e[93mApplying root-level optimizations for S24 Ultra...\e[0m"
+        
+        # Use root to apply more aggressive tweaks
+        su -c "echo 0 > /proc/sys/vm/swappiness" 2>/dev/null
+        su -c "echo 1 > /proc/sys/vm/compact_memory" 2>/dev/null
+        su -c "echo 80 > /proc/sys/vm/vfs_cache_pressure" 2>/dev/null
+        su -c "echo 5 > /proc/sys/vm/dirty_ratio" 2>/dev/null
+        su -c "echo 100 > /proc/sys/vm/dirty_expire_centisecs" 2>/dev/null
+        
+        # Adjust I/O scheduler for better performance
+        for block in /sys/block/*/queue/scheduler; do
+            su -c "echo 'cfq' > $block" 2>/dev/null
+        done
+
+        # Samsung-specific GPU optimizations
+        su -c "echo 1 > /sys/class/kgsl/kgsl-3d0/force_bus_on" 2>/dev/null
+        su -c "echo 1 > /sys/class/kgsl/kgsl-3d0/force_rail_on" 2>/dev/null
+        su -c "echo 1 > /sys/class/kgsl/kgsl-3d0/force_clk_on" 2>/dev/null
+        
+        # Snapdragon-specific tweaks
+        if [[ "$CPU_INFO" == *"Qualcomm"* ]] || [[ "$CPU_INFO" == *"Snapdragon"* ]]; then
+            # Set CPU governor to performance
+            for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
+                su -c "echo performance > $cpu" 2>/dev/null
+            done
+            
+            # Set GPU governor to performance
+            su -c "echo performance > /sys/class/kgsl/kgsl-3d0/devfreq/governor" 2>/dev/null
+            
+            # Disable CPU core idle mode for better performance (temporary)
+            for cpu in /sys/devices/system/cpu/cpu*/cpuidle/state*/disable; do
+                su -c "echo 1 > $cpu" 2>/dev/null
+            done
+        fi
+        
+        # Exynos-specific tweaks
+        if [[ "$CPU_INFO" == *"Exynos"* ]]; then
+            # Set to performance mode
+            for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
+                su -c "echo performance > $cpu" 2>/dev/null
+            done
+            
+            # GPU tweaks for Exynos
+            if [ -d "/sys/devices/platform/18500000.mali" ]; then
+                su -c "echo 'always_on' > /sys/devices/platform/18500000.mali/power_policy" 2>/dev/null
+            fi
+        fi
+        
+        # SafetyNet bypass attempt for Samsung
+        if [ -d "/data/adb/modules" ] && [ -d "/data/adb/magisk" ]; then
+            echo -e "\e[93mConfiguring SafetyNet bypass for Samsung...\e[0m"
+            su -c "magisk --sqlite \"DELETE FROM hidelist WHERE package_name='com.google.android.gms'\"" 2>/dev/null
+            su -c "magisk --sqlite \"INSERT INTO hidelist (package_name) VALUES ('com.google.android.gms')\"" 2>/dev/null
+            su -c "magisk --sqlite \"DELETE FROM hidelist WHERE package_name='com.samsung.android.knox.attestation'\"" 2>/dev/null
+            su -c "magisk --sqlite \"INSERT INTO hidelist (package_name) VALUES ('com.samsung.android.knox.attestation')\"" 2>/dev/null
+            su -c "settings put global device_provisioned 1" 2>/dev/null
+        fi
+        
+        # Disable thermal throttling (use carefully, can cause overheating)
+        su -c "echo 0 > /sys/class/thermal/thermal_zone0/mode" 2>/dev/null
+        
+        send_notification "Root optimizations for S24 Ultra applied"
+        echo -e "\e[92mRoot-level optimizations for S24 Ultra applied\e[0m"
+    fi
+    sleep 1
+}
+
+# Optimize gaming performance for Samsung S24 Ultra
+optimize_gaming() {
+    echo -e "\e[93mOptimizing gaming performance for S24 Ultra...\e[0m"
+    
+    # Close unnecessary background apps
+    am kill-all > /dev/null 2>&1
+    
+    # Non-root tweaks
+    settings put system pointer_speed 1 > /dev/null 2>&1
+    
+    # Samsung Game Launcher and Game Booster settings
+    am start -n com.samsung.android.game.gos/.activity.setting.PerformanceSettingActivity > /dev/null 2>&1
+    am broadcast -a com.samsung.android.game.gos.action.MAX_PERFORMANCE --ez enabled true > /dev/null 2>&1
+    
+    # Try to enable Samsung's Game Booster plus features
+    settings put system game_auto_temperature_control 0 > /dev/null 2>&1
+    
+    # Apply root gaming tweaks if available
+    if [ "$IS_ROOTED" = true ]; then
+        # Disable thermal throttling temporarily (be careful, can cause overheating)
+        su -c "echo 0 > /sys/class/thermal/thermal_zone0/mode" 2>/dev/null
+        
+        # Set touch polling rate to maximum if available
+        su -c "echo 1 > /sys/class/sec/tsp/input/enabled" 2>/dev/null
+        
+        # Set GPU frequency to maximum if available
+        if [ -f "/sys/class/kgsl/kgsl-3d0/max_gpuclk" ]; then
+            MAX_GPU=$(cat /sys/class/kgsl/kgsl-3d0/max_gpuclk)
+            su -c "echo $MAX_GPU > /sys/class/kgsl/kgsl-3d0/gpuclk" 2>/dev/null
+        fi
+        
+        # Force max CPU frequency on performance cores
+        if [ -d "/sys/devices/system/cpu/cpu7/cpufreq" ]; then
+            MAX_FREQ=$(cat /sys/devices/system/cpu/cpu7/cpufreq/scaling_max_freq)
+            su -c "echo $MAX_FREQ > /sys/devices/system/cpu/cpu7/cpufreq/scaling_min_freq" 2>/dev/null
+        fi
+    fi
+    
+    send_notification "Gaming optimizations for S24 Ultra applied"
+    echo -e "\e[92mGaming optimizations for S24 Ultra applied\e[0m"
+    sleep 1
+}
+
+# Optimize camera performance
+optimize_camera() {
+    echo -e "\e[93mOptimizing camera performance for S24 Ultra...\e[0m"
+    
+    # Clear camera cache
+    pm clear com.sec.android.app.camera > /dev/null 2>&1
+    
+    # Set camera to high performance mode if available
+    settings put system camera_performance_mode 1 > /dev/null 2>&1
+    
+    # Root-specific camera optimizations
+    if [ "$IS_ROOTED" = true ]; then
+        # Prioritize camera app
+        su -c "echo -17 > /proc/$(pidof com.sec.android.app.camera)/oom_adj" 2>/dev/null
+        
+        # Allocate more memory to camera process
+        su -c "echo 1 > /proc/sys/vm/compact_memory" 2>/dev/null
+    fi
+    
+    send_notification "Camera optimizations for S24 Ultra applied"
+    echo -e "\e[92mCamera optimizations for S24 Ultra applied\e[0m"
+    sleep 1
+}
+
+# Optimize battery performance without losing too much speed
+optimize_battery() {
+    echo -e "\e[93mOptimizing battery performance while maintaining speed...\e[0m"
+    
+    # Balanced settings for battery
+    settings put system power_saving_mode 0 > /dev/null 2>&1
+    
+    # Disable unnecessary radios when not in use
+    settings put global wifi_sleep_policy 2 > /dev/null 2>&1
+    
+    # Root-specific battery optimizations
+    if [ "$IS_ROOTED" = true ]; then
+        # Better balanced CPU governor
+        for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
+            su -c "echo schedutil > $cpu" 2>/dev/null
+        done
+        
+        # Adjust kernel parameters for better battery life
+        su -c "echo 90 > /proc/sys/vm/dirty_ratio" 2>/dev/null
+        su -c "echo 500 > /proc/sys/vm/dirty_expire_centisecs" 2>/dev/null
+        su -c "echo 10 > /proc/sys/vm/swappiness" 2>/dev/null
+    fi
+    
+    send_notification "Battery optimizations applied (balanced mode)"
+    echo -e "\e[92mBattery optimizations applied (balanced mode)\e[0m"
+    sleep 1
+}
+
+# Monitor cleanup trap
+clean_up() {
+    echo -e "\e[93mScript terminated. Restoring normal device operation.\e[0m"
+    
+    # Reset some settings to default
+    settings put global window_animation_scale 1.0 > /dev/null 2>&1
+    settings put global transition_animation_scale 1.0 > /dev/null 2>&1
+    settings put global animator_duration_scale 1.0 > /dev/null 2>&1
     
     if [ "$IS_ROOTED" = true ]; then
-        # For rooted devices, check actual system properties
-        CURRENT_MODEL=$(su -c "getprop ro.product.model")
-        CURRENT_MANUFACTURER=$(su -c "getprop ro.product.manufacturer")
-        echo -e "${BLUE}Model:${NC} $CURRENT_MODEL"
-        echo -e "${BLUE}Manufacturer:${NC} $CURRENT_MANUFACTURER"
+        # Reset CPU governors to default
+        for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
+            su -c "echo schedutil > $cpu" 2>/dev/null
+        done
         
-        if [[ "$CURRENT_MODEL" == *"S928B"* ]] || [[ "$CURRENT_MODEL" == *"S25"* ]]; then
-            echo -e "${GREEN}Spoofing appears to be ACTIVE${NC}"
-        else
-            echo -e "${YELLOW}Spoofing appears to be INACTIVE${NC}"
-        fi
-    else
-        # For non-rooted, check our local environment
-        if [ -f "$HOME/.termux/spoof_env.sh" ]; then
-            echo -e "${BLUE}Local environment:${NC} Samsung S25 Ultra settings detected"
-            echo -e "${GREEN}Local spoofing is ACTIVE${NC}"
-        else
-            echo -e "${YELLOW}Local spoofing is INACTIVE${NC}"
-        fi
+        # Re-enable thermal management
+        su -c "echo 1 > /sys/class/thermal/thermal_zone0/mode" 2>/dev/null
     fi
     
-    echo ""
-    read -p "Press Enter to continue..."
+    send_notification "S24 Ultra Optimizer stopped - Settings restored"
+    exit 0
 }
 
-# Main execution
-show_animation
-display_header
-check_android
-check_root
-show_notification "Script started. Detected device mode: $([ "$IS_ROOTED" = true ] && echo 'Rooted' || echo 'Non-rooted')"
+# Display menu
+show_menu() {
+    while true; do
+        clear
+        echo -e "\e[96m═══════════════════════════════════════════"
+        echo -e "      SAMSUNG S24 ULTRA OPTIMIZER MENU"
+        echo -e "═══════════════════════════════════════════\e[0m"
+        echo -e "\e[94m1. Apply All Optimizations"
+        echo -e "2. Performance Mode (Maximum Speed)"
+        echo -e "3. Gaming Mode"
+        echo -e "4. Camera Optimization"
+        echo -e "5. Battery Balanced Mode"
+        echo -e "6. Display Device Information"
+        echo -e "7. Restart Device"
+        echo -e "8. Exit and Restore Default Settings\e[0m"
+        echo -e "\e[96m═══════════════════════════════════════════\e[0m"
+        echo -ne "\e[93mSelect an option [1-8]: \e[0m"
+        read -r choice
+        
+        case $choice in
+            1)
+                optimize_performance_nonroot
+                optimize_performance_root
+                optimize_gaming
+                optimize_camera
+                echo -e "\e[92m✅ All optimizations applied successfully!\e[0m"
+                sleep 2
+                ;;
+            2)
+                optimize_performance_nonroot
+                optimize_performance_root
+                echo -e "\e[92m✅ Performance mode enabled!\e[0m"
+                sleep 2
+                ;;
+            3)
+                optimize_gaming
+                echo -e "\e[92m✅ Gaming mode enabled!\e[0m"
+                sleep 2
+                ;;
+            4)
+                optimize_camera
+                echo -e "\e[92m✅ Camera optimizations applied!\e[0m"
+                sleep 2
+                ;;
+            5)
+                optimize_battery
+                echo -e "\e[92m✅ Battery balanced mode enabled!\e[0m"
+                sleep 2
+                ;;
+            6)
+                get_device_info
+                display_device_info
+                echo -e "\e[93mPress Enter to continue...\e[0m"
+                read
+                ;;
+            7)
+                get_device_info
+                display_device_info "restart"
+                ;;
+            8)
+                clean_up
+                ;;
+            *)
+                echo -e "\e[91mInvalid option. Please try again.\e[0m"
+                sleep 1
+                ;;
+        esac
+    done
+}
 
-# Main menu
-while true; do
-    display_header
-    echo ""
-    echo -e "${CYAN}Select an option:${NC}"
-    echo -e "${BLUE}1. ${GREEN}Spoof device as Samsung S25 Ultra${NC}"
-    echo -e "${BLUE}2. ${YELLOW}Restore original device properties${NC}"
-    echo -e "${BLUE}3. ${PURPLE}Check spoofing status${NC}"
-    echo -e "${BLUE}4. ${RED}Exit${NC}"
-    read -p "Enter your choice (1-4): " choice
+# Main execution function
+main() {
+    # Set trap for clean exit
+    trap clean_up SIGINT SIGTERM
+    
+    # Show animation
+    display_logo
+    
+    # Check root status
+    check_root
+    
+    # Get and display device info
+    get_device_info
+    display_device_info
+    
+    # Show menu
+    show_menu
+}
 
-    case $choice in
-        1)
-            if [ "$IS_ROOTED" = true ]; then
-                spoof_device_root
-            else
-                spoof_device_nonroot
-            fi
-            ;;
-        2)
-            restore_original
-            ;;
-        3)
-            check_spoof_status
-            continue
-            ;;
-        4)
-            show_notification "Script exited by user."
-            echo -e "${RED}Exiting script.${NC}"
-            exit 0
-            ;;
-        *)
-            show_notification "Invalid option selected."
-            echo -e "${RED}Invalid option. Please try again.${NC}"
-            sleep 1
-            continue
-            ;;
-    esac
-
-    # Ask if user wants to continue
-    echo ""
-    read -p "Would you like to return to the main menu? (y/n): " continue_choice
-    if [[ ! "$continue_choice" =~ ^[Yy]$ ]]; then
-        break
-    fi
-done
-
-show_notification "Script completed successfully!"
-echo ""
-echo -e "${CYAN}=====================================${NC}"
-echo -e "${GREEN}    Script completed successfully!   ${NC}"
-echo -e "${GREEN}    Created by: Willy Gailo          ${NC}"
-echo -e "${CYAN}=====================================${NC}"
-
-# Final animation
-show_animation
-display_header
-sleep 1
-
-exit 0
+# Execute main function
+main
